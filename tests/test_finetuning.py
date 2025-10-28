@@ -62,6 +62,7 @@ def test_lora_forward_pass():
     # Perform the forward pass
     lora_output = lora_layer(x)
     original_output = original_layer(x)
+    print(original_output.shape)
 
     # Check that the output shape matches the original layer output
     assert lora_output.shape == original_output.shape, "LoRA output shape does not match original layer output shape."
@@ -75,6 +76,9 @@ def test_lora_forward_pass():
     elif platform.system() == "Darwin" or platform.system() == "Linux":
         expected_output = torch.tensor([[-7.2452, -7.3211, -7.5850, -8.1368, -8.8998, -8.4971, -7.1514, -9.7109, -8.8360, -8.3201],
                                         [-2.1295, -2.3751, -1.9628, -2.1550, -1.5780, -2.5529, -1.4401, -2.0061, -2.0690, -1.8637]])
+        
+    print(expected_output)
+    print(lora_output)
 
     assert torch.allclose(lora_output, expected_output, atol=1e-4), "LoRA output doesn't match the expected output."
 
